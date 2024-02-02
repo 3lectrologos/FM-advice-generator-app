@@ -65,7 +65,7 @@ export default function Home() {
           <Divider />
           <Button
             className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2`}
-            onClick={onClick}
+            onClick={() => onClick({ minDelaySeconds: 2 })}
             isLoading={isLoading}
           />
         </div>
