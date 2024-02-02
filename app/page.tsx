@@ -39,7 +39,7 @@ export default function Home() {
       headers: {
         'Content-Type': 'application/json',
       },
-      cache: 'no-store',
+      cache: 'no-cache',
     })
     return (await response.json()) as Slip
   }
