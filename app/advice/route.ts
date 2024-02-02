@@ -11,3 +11,5 @@ export async function GET(request: Request) {
   const data = (await response.json()) as { slip: Slip }
   return Response.json(data.slip)
 }
+
+export const dynamic = 'force-dynamic'
