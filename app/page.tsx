@@ -16,10 +16,11 @@ export default function Home() {
   const [advice, setAdvice] = useState(defaultAdvice)
 
   useEffect(() => {
-    onClick(0)
+    onClick({ minDelaySeconds: 0 })
   }, [])
 
-  async function onClick(minDelaySeconds = 2) {
+  async function onClick({ minDelaySeconds = 2 }) {
+    console.log(minDelaySeconds)
     setIsLoading(true)
     const start = Date.now()
     const result = await getAdvice()
@@ -38,6 +39,7 @@ export default function Home() {
       headers: {
         'Content-Type': 'application/json',
       },
+      cache: 'no-store',
     })
     return (await response.json()) as Slip
   }
