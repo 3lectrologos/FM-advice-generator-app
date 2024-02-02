@@ -19,6 +19,7 @@ export default function Button({
         isLoading && 'pointer-events-none',
         className
       )}
+      aria-label="Get advice"
       onClick={onClick}
       disabled={isLoading}
     >
