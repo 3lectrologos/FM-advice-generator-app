@@ -5,7 +5,7 @@ import './globals.css'
 const manrope = Manrope({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Acvice generator app',
+  title: 'Advice generator app',
   description: 'Get advice from the advice slip API',
 }
 

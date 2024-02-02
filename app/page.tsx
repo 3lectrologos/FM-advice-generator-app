@@ -2,25 +2,24 @@
 
 import { twMerge } from 'tailwind-merge'
 import Button from '@/app/Button'
-import { useState } from 'react'
-
-type Slip = {
-  slip_id: number
-  advice: string
-}
+import { useEffect, useState } from 'react'
+import { Slip } from '@/app/types'
 
 const defaultAdvice = {
-  slip_id: 117,
+  id: 117,
   advice:
     "It is easy to sit up and take notice, what's difficult is getting up and taking action",
 }
 
 export default function Home() {
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   const [advice, setAdvice] = useState(defaultAdvice)
 
-  async function onClick() {
-    const minDelaySeconds = 2
+  useEffect(() => {
+    onClick(0)
+  }, [])
+
+  async function onClick(minDelaySeconds = 2) {
     setIsLoading(true)
     const start = Date.now()
     const result = await getAdvice()
@@ -34,16 +33,13 @@ export default function Home() {
   }
 
   async function getAdvice(): Promise<Slip> {
-    const response = await fetch('https://api.adviceslip.com/advice', {
+    const response = await fetch('/advice', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
     })
-    const data = (await response.json()) as {
-      slip: { id: number; advice: string }
-    }
-    return { slip_id: data.slip.id, advice: data.slip.advice }
+    return (await response.json()) as Slip
   }
 
   return (
@@ -96,7 +92,7 @@ function Title({
         className
       )}
     >
-      Advice #{advice.slip_id}
+      Advice #{advice.id}
     </h1>
   )
 }
